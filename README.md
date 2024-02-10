@@ -16,10 +16,13 @@ This document outlines the installation of OpenJDK JDK 21.0.2 for use in the pro
 - **Build Tool:** Apache Maven
   - Apache Maven was used for project initialization and configuration. It provides a convenient way to manage dependencies, build configurations, and project structure.
 
-## Start Script (start.bat)
-A start script named `start.bat` has been included in the project for convenience. This script facilitates the temporary change of the `JAVA_HOME` environment variable to point to the OpenJDK JDK 21.0.2 installation directory, runs the Java application, and then restores the `JAVA_HOME` environment variable to its original value.
-
-To use the script:
-1. Open a command prompt.
-2. Navigate to the project directory.
-3. Run the `start.bat` script.
+## Using Apache Maven
+To use Apache Maven for this project, follow these steps:
+1. Open a PowerShell or Command Prompt window.
+2. Set the `JAVA_HOME` environment variable to point to the OpenJDK JDK 21.0.2 installation directory by running the following command:
+   
+   ```powershell
+   $env:JAVA_HOME = "C:\dev\RIS_SkillsDemo\open_jdk\jdk-21.0.2"
+   cd \src
+   .\bin\mvn archetype:generate
+    ```
