@@ -38,3 +38,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Node.js dependencies
+/node_modules
+
+# Compiled output
+/build

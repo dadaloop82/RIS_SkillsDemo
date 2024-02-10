@@ -42,21 +42,5 @@ Ensure the following software is installed on your system:
   - `test`: Test source code directory.
     - `java`: Java test code directory.
 
-
 ## Additional Frontend Structure
 For the frontend, React.js will be initialized in the frontend directory located under src/main. The frontend folder structure will be initialized by React.js, and the React components will be developed within this structure.
-
-## Project Initialization and Configuration
-- **Build Tool:** Apache Maven
-  - Apache Maven was used for project initialization and configuration. It provides a convenient way to manage dependencies, build configurations, and project structure.
-
-## Using Apache Maven
-To use Apache Maven for this project, follow these steps:
-1. Open a PowerShell or Command Prompt window.
-2. Set the `JAVA_HOME` environment variable to point to the OpenJDK JDK 21.0.2 installation directory by running the following command:
-   
-   ```powershell
-   $env:JAVA_HOME = "C:\dev\RIS_SkillsDemo\open_jdk\jdk-21.0.2"
-   cd \src
-   .\bin\mvn archetype:generate
-    ```
