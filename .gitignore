@@ -1,0 +1,2 @@
+# Exclude OpenJDK JDK 21.0.2 directory
+open_jdk/jdk-21.0.2/
