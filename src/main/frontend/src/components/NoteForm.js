@@ -1,37 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from "react";
+import { Form, Button, CloseButton } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 function NoteForm({ onAddNote }) {
-  // State to manage the title and text of the note
-  const [title, setTitle] = useState('');
-  const [text, setText] = useState('');
+  const [title, setTitle] = useState("");
+  const [text, setText] = useState("");
+  const [showForm, setShowForm] = useState(false);
 
-  // Function to handle form submission
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (formRef.current && !formRef.current.contains(event.target)) {
+        setShowForm(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
-    if (!title.trim() || !text.trim()) return; // Check if title or text are empty or whitespace
-    onAddNote(title, text); // Call the onAddNote function passed as prop, passing title and text
-    setTitle(''); // Clear the title field after submission
-    setText(''); // Clear the text field after submission
+    e.preventDefault();
+    if (!title.trim() || !text.trim()) return;
+    onAddNote(title, text);
+    setTitle("");
+    setText("");
+    setShowForm(false);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Input field for the title of the note */}
-      <input
-        type="text"
-        placeholder="Title"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)} // Update the title state as the user types
-      />
-      {/* Textarea for the text of the note */}
-      <textarea
-        placeholder="Text"
-        value={text}
-        onChange={(e) => setText(e.target.value)} // Update the text state as the user types
-      />
-      {/* Submit button to add the note */}
-      <button type="submit">Add Note</button>
-    </form>
+    <div ref={formRef}>
+      {!showForm ? (
+        <Button variant="outline-primary" onClick={() => setShowForm(true)}>
+          <FontAwesomeIcon icon={faPlus} /> Add Note
+        </Button>
+      ) : (
+        <Form onSubmit={handleSubmit} className="newForm">
+          <CloseButton
+            onClick={() => setShowForm(false)}
+            className="close-button"
+            aria-label="Close"
+          >
+            <FontAwesomeIcon icon={faTimes} />
+          </CloseButton>
+          <Form.Group controlId="formTitle">
+            <Form.Control
+              type="text"
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Form.Group controlId="formText">
+            <Form.Control
+              as="textarea"
+              rows={3}
+              placeholder="Text"
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              required
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            <FontAwesomeIcon icon={faPlus} /> Add Note
+          </Button>
+        </Form>
+      )}
+    </div>
   );
 }
 

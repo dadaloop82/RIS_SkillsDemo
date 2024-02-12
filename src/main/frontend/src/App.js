@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'; // Importing necessary depen
 import axios from 'axios'; // Importing Axios for making HTTP requests
 import NoteForm from './components/NoteForm'; // Importing the NoteForm component
 import NoteList from './components/NoteList'; // Importing the NoteList component
+
 import './App.css'; // Importing the CSS file for styling
 
 function App() {
@@ -71,6 +72,8 @@ function App() {
   return (
     <div className="app">
       <h1>Note Management Web Application</h1>
+      <h2>Demo for Evaluating Daniel Stimpfl's Skills - Created for RIS Bolzano</h2>
+      <p>Utilizes an embedded Java database (H2) for persistence</p>
       {/* NoteForm component for adding new notes */}
       <NoteForm onAddNote={addNote} />
       {/* NoteList component for displaying and managing notes */}

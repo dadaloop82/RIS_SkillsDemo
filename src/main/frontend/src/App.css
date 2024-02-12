@@ -1,38 +1,109 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app {
+  margin: 20px;
+  padding: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.note {
+  background-color: #ffd700;
+  padding: 20px;
+  margin: 10px;
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+  display: inline-block;
+  vertical-align: top;
+  animation: fadeIn 0.5s ease;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.note h3 {
+  margin: 0.2em 0px;
 }
 
-.App-link {
-  color: #61dafb;
+.note p {
+  margin: 0.2em 0px;
 }
 
-@keyframes App-logo-spin {
+.add-note {
+  margin-top: 20px;
+}
+
+.newForm {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 2.5em 1em 1em 1em;
+  margin: 1em 0;
+  max-width: fit-content;
+  position: relative;
+  animation: slideDown 0.5s ease;
+}
+
+.close-button {
+  position: absolute;
+  top: 0.5em;
+  left: 1em;
+}
+
+input,
+textarea {
+  display: block;
+  margin-bottom: 1.5em;
+  padding: 0.4em;
+  border-radius: 5px;
+}
+
+.newForm input[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+
+.newForm input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.note-container .toolBox {
+  border-top: 1px dotted gray;
+  padding: 0.5em 0px;
+  margin: 0.5em 0px;
+}
+
+button {
+  margin-right: 0.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+p.note-timestamp {
+  font-size: 40%;
+  margin-top: 2em;
 }
