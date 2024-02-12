@@ -70,23 +70,25 @@ if ($mvnOutput -match "BUILD FAILURE" ) {
     Exit
 }
 
-## Execute mvn spring-boot:run in a new separate window
+# Execute mvn spring-boot:run in a new separate window
 Write-Output "▶ Executing mvn spring-boot:run in a new window..."
-Start-Process -FilePath ".\apache_maven\apache-maven-$mavenVersion\bin\mvn.cmd" -ArgumentList "spring-boot:run"
+$mvnProcess = Start-Process -FilePath ".\apache_maven\apache-maven-$mavenVersion\bin\mvn.cmd" -ArgumentList "spring-boot:run" -PassThru
 
-# Wait for about 10 seconds before checking npm install
+# Wait for about 10 seconds before checking if Maven process has exited
+Write-Output "▪ Waiting 10 secs..."
 Start-Sleep -Seconds 10
 
-# Check if 'node_modules' directory exists in the frontend path
-if (-Not (Test-Path -Path (Join-Path $frontendPath "node_modules"))) {
-    Write-Output "▶ 'node_modules' directory not found. Running npm install..."
-    Start-Process -FilePath "npm" -ArgumentList "install" -WorkingDirectory $frontendPath -Wait
-    Write-Output "✔ npm install completed."
-}
+# Check if Maven process has exited
+if (-not $mvnProcess.HasExited) {
+    Write-Output "Maven process is still running. Starting npm in a new window on port 8080..."
 
-# Start npm in a new window on port 8080
-Write-Output "▶ Starting npm in a new window on port 8080..."
-Start-Process -FilePath "npm" -ArgumentList "start --port 8080" -WorkingDirectory $frontendPath
+    # Start npm in a new window on port 8080
+    Start-Process -FilePath "npm" -ArgumentList "start --port 8080" -WorkingDirectory $frontendPath
+} else {
+    # Maven process has exited
+    Write-Error "❌ Maven process has exited before npm could start. Check the Maven build logs for errors."
+    Read-Host "Press Enter to continue..."
+}
 
 # Wait for a key press to exit
 Read-Host "Press any key to exit..."
