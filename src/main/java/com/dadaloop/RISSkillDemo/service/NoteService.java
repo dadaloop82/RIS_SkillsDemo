@@ -1,6 +1,6 @@
 package com.dadaloop.RISSkillDemo.service;
 
-import com.dadaloop.RISSkillDemo.model.Note;
+import com.dadaloop.RISSkillDemo.model.NoteEntity;
 // import com.dadaloop.RISSkillDemo.repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

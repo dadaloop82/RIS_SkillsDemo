@@ -84,9 +84,9 @@ if (-Not (Test-Path -Path (Join-Path $frontendPath "node_modules"))) {
     Write-Output "✔ npm install completed."
 }
 
-# Start npm in a new window
-Write-Output "▶ Starting npm in a new window..."
-Start-Process -FilePath "npm" -ArgumentList "start" -WorkingDirectory $frontendPath
+# Start npm in a new window on port 8080
+Write-Output "▶ Starting npm in a new window on port 8080..."
+Start-Process -FilePath "npm" -ArgumentList "start --port 8080" -WorkingDirectory $frontendPath
 
 # Wait for a key press to exit
 Read-Host "Press any key to exit..."
