@@ -42,6 +42,5 @@ Ensure the following software is installed on your system:
   - `test`: Test source code directory.
     - `java`: Java test code directory.
 
-
 ## Start the project
-To start the project, run the start_java.bat file.
+To start the project, run the `start_dev.ps1` file for development or the `start_prod.ps1` file for production.
