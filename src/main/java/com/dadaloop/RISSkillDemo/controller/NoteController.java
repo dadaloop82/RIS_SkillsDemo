@@ -22,7 +22,7 @@ public class NoteController {
 
   /**
    * Retrieves all notes from the database.
-   * 
+   *
    * @return A ResponseEntity containing a list of NoteEntity instances and the HTTP status.
    */
   @GetMapping
@@ -38,7 +38,7 @@ public class NoteController {
 
   /**
    * Retrieves a single note by its ID.
-   * 
+   *
    * @param id The ID of the note to retrieve.
    * @return A ResponseEntity with the found note or a not found status.
    */
@@ -56,7 +56,7 @@ public class NoteController {
 
   /**
    * Adds a new note to the database.
-   * 
+   *
    * @param note The NoteEntity to add.
    * @return A ResponseEntity with the saved note and the HTTP status.
    */
@@ -72,7 +72,7 @@ public class NoteController {
 
   /**
    * Updates an existing note identified by its ID.
-   * 
+   *
    * @param id The ID of the note to update.
    * @param updatedNote The new data for the note.
    * @return A ResponseEntity with the updated note or a not found status.
@@ -83,9 +83,15 @@ public class NoteController {
     @RequestBody NoteEntity updatedNote
   ) {
     try {
-      Optional<NoteEntity> updatedNoteEntityOptional = noteService.updateNote(id, updatedNote);
+      Optional<NoteEntity> updatedNoteEntityOptional = noteService.updateNote(
+        id,
+        updatedNote
+      );
       if (updatedNoteEntityOptional.isPresent()) {
-        return new ResponseEntity<>(updatedNoteEntityOptional.get(), HttpStatus.OK); // Return the updated note with status OK.
+        return new ResponseEntity<>(
+          updatedNoteEntityOptional.get(),
+          HttpStatus.OK
+        ); // Return the updated note with status OK.
       } else {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return Not Found if the note doesn't exist.
       }
@@ -96,7 +102,7 @@ public class NoteController {
 
   /**
    * Deletes an existing note identified by its ID.
-   * 
+   *
    * @param id The ID of the note to delete.
    * @return A ResponseEntity indicating the result of the delete operation.
    */
@@ -114,3 +120,5 @@ public class NoteController {
     }
   }
 }
+
+

@@ -60,9 +60,9 @@ public class NoteService {
       NoteEntity existingNote = optionalExistingNote.get();
       existingNote.setTitle(updatedNote.getTitle());
       existingNote.setText(updatedNote.getText());
-      return Optional.of(noteRepository.save(existingNote)); // Save and return the updated note
+      return Optional.of(noteRepository.save(existingNote)); 
     }
-    return Optional.empty(); // Return an empty Optional if the note doesn't exist
+    return Optional.empty(); 
   }
 
   /**
@@ -74,8 +74,31 @@ public class NoteService {
   public boolean deleteNote(Long id) {
     if (noteRepository.existsById(id)) {
       noteRepository.deleteById(id);
-      return true; // Return true if the note is successfully deleted
+      return true;
     }
-    return false; // Return false if the note doesn't exist
+    return false; 
+  }
+
+  /**
+   * Checks the connection status to the database.
+   * 
+   * @return true if the connection is active, false if it's inactive.
+   */
+  public boolean checkDBConnection() {
+    try {
+        noteRepository.count(); 
+        return true; 
+    } catch (Exception e) {
+        return false; 
+    }
+  }
+
+  /**
+   * Retrieves the number of records in the database.
+   * 
+   * @return The number of records in the database.
+   */
+  public int getRecordCount() {    
+    return (int) noteRepository.count();
   }
 }
