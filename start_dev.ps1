@@ -91,7 +91,12 @@ Start-Process -FilePath "npm" -ArgumentList "start" -WorkingDirectory $frontendP
 # Wait for a key press to exit
 Read-Host "Press any key to exit..."
 
+# Terminate all Java and Node processes
+Get-Process java | Stop-Process -Force
+Get-Process node | Stop-Process -Force
+Write-Output "▶ Java & Node killed ..."
+
 # Restore the JAVA_HOME and PATH variables to their original values
 $env:JAVA_HOME = $originalJavaHome
 $env:PATH = $originalPath
-Write-Output "Restored JAVA_HOME and PATH to their original values."
+Write-Output "Restored JAVA_HOME and PATH to their original values and terminated Java and Node processes."
