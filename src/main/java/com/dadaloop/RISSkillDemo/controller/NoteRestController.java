@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/notes")
 public class NoteRestController {
 
-  private List<NoteEntity> notes = new ArrayList<>();
+  private List<NoteEntity> notes = NoteEntity.generateRandomNotes(); // Generazione casuale delle note iniziali
 
   // Endpoint to get all notes
   @GetMapping
   public ResponseEntity<List<NoteEntity>> getAllNotes() {
-    List<NoteEntity> randomNotes = NoteEntity.generateRandomNotes();
-    return new ResponseEntity<>(randomNotes, HttpStatus.OK);
+    return new ResponseEntity<>(notes, HttpStatus.OK);
   }
 
   // Endpoint to add a new note
