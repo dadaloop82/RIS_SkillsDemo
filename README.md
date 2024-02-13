@@ -16,25 +16,6 @@ Ensure the following software is installed on your system:
 - **Frontend Framework:** React (Node.js)
 - **IDE:** Visual Studio Code
 
-graph TD;
-    subgraph "Backend" 
-        springboot(Spring Boot)
-        maven(Maven)
-        java(Java)
-    end
-    subgraph "Frontend"
-        react(React)
-        nodejs(Node.js)
-    end
-    vscode(VS Code)
-
-    java --> springboot
-    maven --> springboot
-    springboot --> java
-    react --> nodejs
-    vscode --> java
-    vscode --> react
-
 ## Project Structure
 The project structure is organized as follows:
 - `.mvn`: Maven wrapper directory.
