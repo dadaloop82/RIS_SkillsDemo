@@ -1,7 +1,7 @@
 # RIS_SkillsDemo
 
 ## Introduction
-This document outlines the installation of OpenJDK JDK 21.0.2 for use in the project. Please note that the JDK itself is not included in the repository as it's listed in the `.gitignore` file.
+This document outlines the installation and setup of the RIS_SkillsDemo project. It includes information about the technologies used, project structure, and how to start the project.
 
 ## Prerequisites
 Ensure the following software is installed on your system:
@@ -10,37 +10,58 @@ Ensure the following software is installed on your system:
 - Node.js (for React frontend)
 - Visual Studio Code (or any preferred IDE)
 
-## OpenJDK JDK 21.0.2
-- **Version Used:** 21.0.2
-- **Download Location:** [Java.net](https://jdk.java.net/21/)
+## Technologies Used
+- **Backend Framework:** Apache Maven with Spring Boot
+- **Backend Language:** Java
+- **Frontend Framework:** React (Node.js)
+- **IDE:** Visual Studio Code
 
-## Apache Maven
-- **Version Used:** 3.9.6
-- **Download Location:** [Apache Maven](https://maven.apache.org/download.cgi)
+graph TD;
+    subgraph "Backend" 
+        springboot(Spring Boot)
+        maven(Maven)
+        java(Java)
+    end
+    subgraph "Frontend"
+        react(React)
+        nodejs(Node.js)
+    end
+    vscode(VS Code)
 
-## Node.js
-- **Download Location:** [Node.js](https://nodejs.org/)
-
-## IDE and Extensions
-- **IDE Used:** Visual Studio Code
-- **Extensions Recommended:** Java Extension Pack
+    java --> springboot
+    maven --> springboot
+    springboot --> java
+    react --> nodejs
+    vscode --> java
+    vscode --> react
 
 ## Project Structure
+The project structure is organized as follows:
 - `.mvn`: Maven wrapper directory.
 - `apache_maven`: Apache Maven installation directory.
 - `open_jdk`: OpenJDK installation directory.
 - `src`: Source code directory.
   - `main`: Main source code directory.
-    - `frontend`: Frontend source code directory.
+    - `frontend`: Frontend source code directory (React).
     - `java`: Java source code directory.
-      - `com`: Main package directory.
-        - `dadaloop`: Project package directory.
-          - `RISSkillDemo`: Main project directory.
-    - `resources`: Resource directory.
-      - `static`: Static resources directory.
-      - `templates`: Templates directory.
+      - `com.dadaloop.RISSkillDemo`: Main package directory for the project.
+        - `controller`: Controller classes for handling HTTP requests.
+        - `model`: Model classes representing data entities.
+        - `repository`: Repository classes for database operations.
+        - `service`: Service classes for business logic.
+    - `resources`: Resource directory containing static files and templates.
+      - `static`: Static resources directory for frontend assets.
+      - `templates`: Templates directory for server-side rendering.
   - `test`: Test source code directory.
-    - `java`: Java test code directory.
 
-## Start the project
-To start the project, run the `start_dev.ps1` file for development or the `start_prod.ps1` file for production.
+## Start the Project
+To start the project:
+- Run `start_dev.ps1` for development mode.
+- Run `start_prod.ps1` for production mode.
+
+## Project Description
+The RIS_SkillsDemo project is a note management application that allows users to add, edit, and delete annotations without authentication. It utilizes Apache Maven with Spring Boot as the backend framework, Java as the backend language, and React (Node.js) for the frontend. Visual Studio Code was used as the Integrated Development Environment (IDE).
+
+The backend utilizes Spring Boot's capabilities to handle HTTP requests with controller classes, perform database operations with repository classes, and implement business logic with service classes. The project uses H2, an embedded Java database, for persistence.
+
+The frontend provides a user-friendly interface for managing notes, implemented with React components. The application aims to be robust, maintainable, and understandable, with extensive comments provided throughout the codebase. Additionally, the current state of the H2 database is displayed at the bottom of the frontend interface for reference.

@@ -25,16 +25,16 @@ public class DBInfoController {
    * @return A ResponseEntity containing database information and HTTP status.
    */
   @GetMapping
-  public ResponseEntity<Map<String, Object>> getDBInfo() { // Change the return type to match the actual return object
+  public ResponseEntity<Map<String, Object>> getDBInfo() { 
     try {
-      boolean isConnected = noteService.checkDBConnection(); // Assuming implementation exists in NoteService
-      int recordCount = noteService.getRecordCount(); // Assuming implementation exists in NoteService
+      boolean isConnected = noteService.checkDBConnection();
+      int recordCount = noteService.getRecordCount(); 
 
       Map<String, Object> info = new HashMap<>();
       info.put("connectionStatus", isConnected ? "Connected" : "Disconnected");
       info.put("recordCount", recordCount);
 
-      return new ResponseEntity<>(info, HttpStatus.OK); // This now matches the declared return type
+      return new ResponseEntity<>(info, HttpStatus.OK); 
     } catch (Exception e) {
       return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

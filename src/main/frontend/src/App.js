@@ -8,12 +8,14 @@ import { faDatabase } from "@fortawesome/free-solid-svg-icons";
 import "./App.css";
 
 function App() {
-  const [notes, setNotes] = useState([]);
-  const [dbInfo, setDbInfo] = useState({
+  // State for storing notes and database information
+  const [notes, setNotes] = useState([]); // State for notes
+  const [dbInfo, setDbInfo] = useState({ // State for database information
     connectionStatus: "",
     recordCount: 0,
   });
 
+  // Function to fetch database information
   const fetchDbInfo = async () => {
     try {
       const response = await axios.get("/api/db-info");
@@ -23,6 +25,7 @@ function App() {
     }
   };
 
+  // Function to fetch notes and database information on component mount
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -33,39 +36,41 @@ function App() {
       }
     };
 
-    fetchNotes();
-    fetchDbInfo();
-  }, []);
+    fetchNotes(); // Fetch notes
+    fetchDbInfo(); // Fetch database information
+  }, []); // Empty dependency array ensures this effect runs only once on mount
 
+  // Function to add a new note
   const addNote = async (title, text) => {
     try {
       const response = await axios.post("/api/notes", { title, text });
       const newNote = response.data;
-      setNotes([...notes, newNote]);
-      // Dopo aver aggiunto il nuovo elemento, richiedi le informazioni aggiornate dal backend
-      fetchDbInfo();
+      setNotes([...notes, newNote]); // Add new note to the state
+      fetchDbInfo(); // Fetch updated database information
     } catch (error) {
       console.error("Error adding note:", error);
     }
   };
 
+  // Function to update an existing note
   const updateNote = async (index, title, text) => {
     try {
       await axios.put(`/api/notes/${index}`, { title, text });
       const updatedNotes = [...notes];
       updatedNotes[index] = { title, text };
-      setNotes(updatedNotes);
+      setNotes(updatedNotes); // Update note in the state
     } catch (error) {
       console.error("Error updating note:", error);
     }
   };
 
+  // Function to delete a note
   const deleteNote = async (id) => {
     try {
       await axios.delete(`/api/notes/${id}`);
       const updatedNotes = notes.filter((note) => note.id !== id);
-      setNotes(updatedNotes);      
-      fetchDbInfo();
+      setNotes(updatedNotes); // Update notes in the state after deletion
+      fetchDbInfo(); // Fetch updated database information
     } catch (error) {
       console.error("Error deleting note:", error);
     }
@@ -94,11 +99,11 @@ function App() {
           Record Count: {dbInfo.recordCount}
         </p>
       </div>
-      <NoteForm onAddNote={addNote} />
+      <NoteForm onAddNote={addNote} /> {/* Component for adding a new note */}
       <NoteList
         notes={notes}
-        onUpdateNote={updateNote}
-        onDeleteNote={deleteNote}
+        onUpdateNote={updateNote} // Function for updating a note
+        onDeleteNote={deleteNote} // Function for deleting a note
       />
     </div>
   );

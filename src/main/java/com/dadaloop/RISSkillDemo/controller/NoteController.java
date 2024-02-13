@@ -9,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-/**
- * The NoteController class is a REST controller that handles HTTP requests for managing notes.
- * It uses the NoteService to interact with the database and perform CRUD operations.
- */
+
 @RestController // Marks this class as a REST controller, capable of handling HTTP requests.
 @RequestMapping("/api/notes") // Maps HTTP requests to /api/notes to methods in this controller.
 public class NoteController {

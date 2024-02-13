@@ -1,7 +1,7 @@
 package com.dadaloop.RISSkillDemo.service;
 
 import com.dadaloop.RISSkillDemo.model.NoteEntity;
-import com.dadaloop.RISSkillDemo.repository.NoteRepository; // Make sure to import the correct repository
+import com.dadaloop.RISSkillDemo.repository.NoteRepository; 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -9,11 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.logging.Logger;
 
-/**
- * The NoteService class provides business logic for managing notes.
- * It uses the NoteRepository to interact with the database.
- * This class is annotated with @Service to indicate that it's a Spring service component.
- */
+
 @Service
 public class NoteService {
 
@@ -21,7 +17,7 @@ public class NoteService {
 
 
   @Autowired
-  private NoteRepository noteRepository; // Autowiring the NoteRepository to access its methods
+  private NoteRepository noteRepository; 
 
   /**
    * Retrieves all notes from the database.

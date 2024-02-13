@@ -19,7 +19,7 @@ function NoteList({ notes, onUpdateNote, onDeleteNote }) {
 
   // Function to save changes made to a note
   const saveEditing = () => {
-    onUpdateNote(editingNote, editedTitle, editedText); // Call onUpdateNote function with updated note data
+    onUpdateNote(editingNote, editedTitle, editedText); // Update the note with new data
     setEditingNote(null); // Reset editing state
     setEditedTitle(""); // Clear edited title
     setEditedText(""); // Clear edited text
@@ -34,7 +34,7 @@ function NoteList({ notes, onUpdateNote, onDeleteNote }) {
 
   // Function to delete a note
   const handleDeleteNote = (id) => {
-    onDeleteNote(id); // Call onDeleteNote function to delete the note using the ID
+    onDeleteNote(id); // Delete the note using its ID
     if (editingNote === id) {
       cancelEditing(); // If the note being edited is deleted, cancel editing
     }
