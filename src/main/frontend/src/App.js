@@ -60,12 +60,11 @@ function App() {
     }
   };
 
-  const deleteNote = async (index) => {
+  const deleteNote = async (id) => {
     try {
-      await axios.delete(`/api/notes/${index}`);
-      const updatedNotes = notes.filter((_, i) => i !== index);
-      setNotes(updatedNotes);
-      // Dopo aver cancellato l'elemento, richiedi le informazioni aggiornate dal backend
+      await axios.delete(`/api/notes/${id}`);
+      const updatedNotes = notes.filter((note) => note.id !== id);
+      setNotes(updatedNotes);      
       fetchDbInfo();
     } catch (error) {
       console.error("Error deleting note:", error);

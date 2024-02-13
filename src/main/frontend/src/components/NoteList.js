@@ -33,9 +33,9 @@ function NoteList({ notes, onUpdateNote, onDeleteNote }) {
   };
 
   // Function to delete a note
-  const handleDeleteNote = (index) => {
-    onDeleteNote(index); // Call onDeleteNote function to delete the note
-    if (editingNote === index) {
+  const handleDeleteNote = (id) => {
+    onDeleteNote(id); // Call onDeleteNote function to delete the note using the ID
+    if (editingNote === id) {
       cancelEditing(); // If the note being edited is deleted, cancel editing
     }
   };
@@ -87,7 +87,7 @@ function NoteList({ notes, onUpdateNote, onDeleteNote }) {
                 <>
                   <h3>{note.title}</h3>
                   <p>{note.text}</p>
-                  <p className="note-timestamp">Created on: {formatDateTime()}</p> {/* Display timestamp */}
+                  <p className="note-timestamp">(ID:{note.id}) Created on: {formatDateTime()}</p> {/* Display timestamp */}
                   <div className="toolBox">
                     <Button
                       variant="primary"
@@ -98,7 +98,7 @@ function NoteList({ notes, onUpdateNote, onDeleteNote }) {
                     </Button>
                     <Button
                       variant="danger"
-                      onClick={() => handleDeleteNote(index)}
+                      onClick={() => handleDeleteNote(note.id)} // Pass the note ID to handleDeleteNote
                     >
                       <FontAwesomeIcon icon={faTrashAlt} />
                     </Button>
