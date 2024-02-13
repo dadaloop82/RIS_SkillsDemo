@@ -36,9 +36,14 @@ The project structure is organized as follows:
   - `test`: Test source code directory.
 
 ## Start the Project
-To start the project:
-- Run `start_dev.ps1` for development mode.
-- Run `start_prod.ps1` for production mode.
+
+To start the project, follow these steps:
+
+1. **Development Mode:**
+   - Run `start_dev.ps1` for development mode.
+
+   This PowerShell script checks if Node.js is installed, sets `JAVA_HOME`, adds JDK to PATH, verifies Maven installation, executes `mvn clean install`, starts the Spring Boot application, starts the React application, terminates Java and Node processes, and restores original environment variables.
+
 
 ## Project Description
 The RIS_SkillsDemo project is a note management application that allows users to add, edit, and delete annotations without authentication. It utilizes Apache Maven with Spring Boot as the backend framework, Java as the backend language, and React (Node.js) for the frontend. Visual Studio Code was used as the Integrated Development Environment (IDE).
