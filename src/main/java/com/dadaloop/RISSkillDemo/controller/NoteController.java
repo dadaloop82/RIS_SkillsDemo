@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.lang.NonNull;
 
 @RestController // Marks this class as a REST controller, capable of handling HTTP requests.
 @RequestMapping("/api/notes") // Maps HTTP requests to /api/notes to methods in this controller.
@@ -20,7 +20,8 @@ public class NoteController {
   /**
    * Retrieves all notes from the database.
    *
-   * @return A ResponseEntity containing a list of NoteEntity instances and the HTTP status.
+   * @return A ResponseEntity containing a list of NoteEntity instances and the
+   *         HTTP status.
    */
   @GetMapping
   public ResponseEntity<List<NoteEntity>> getAllNotes() {
@@ -40,14 +41,16 @@ public class NoteController {
    * @return A ResponseEntity with the found note or a not found status.
    */
   @GetMapping("/{id}")
-  public ResponseEntity<?> getNoteById(@PathVariable("id") Long id) {
+  public ResponseEntity<?> getNoteById(@PathVariable("id") @NonNull Long id) {
     try {
       Optional<NoteEntity> optionalNote = noteService.getNoteById(id);
-      return optionalNote
-        .map(note -> new ResponseEntity<>(note, HttpStatus.OK)) // Return the note with status OK if found.
-        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND)); // Return Not Found if the note doesn't exist.
+      if (optionalNote.isPresent()) {
+        return new ResponseEntity<>(optionalNote.get(), HttpStatus.OK);
+      } else {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
     } catch (Exception e) {
-      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // Return Internal Server Error on exception.
+      return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -58,7 +61,7 @@ public class NoteController {
    * @return A ResponseEntity with the saved note and the HTTP status.
    */
   @PostMapping
-  public ResponseEntity<?> addNote(@RequestBody NoteEntity note) {
+  public ResponseEntity<?> addNote(@RequestBody @NonNull NoteEntity note) {
     try {
       NoteEntity savedNote = noteService.addNote(note);
       return new ResponseEntity<>(savedNote, HttpStatus.CREATED); // Return the saved note with status CREATED.
@@ -70,25 +73,22 @@ public class NoteController {
   /**
    * Updates an existing note identified by its ID.
    *
-   * @param id The ID of the note to update.
+   * @param id          The ID of the note to update.
    * @param updatedNote The new data for the note.
    * @return A ResponseEntity with the updated note or a not found status.
    */
   @PutMapping("/{id}")
   public ResponseEntity<?> updateNote(
-    @PathVariable("id") Long id,
-    @RequestBody NoteEntity updatedNote
-  ) {
+      @PathVariable("id") @NonNull Long id,
+      @RequestBody @NonNull NoteEntity updatedNote) {
     try {
       Optional<NoteEntity> updatedNoteEntityOptional = noteService.updateNote(
-        id,
-        updatedNote
-      );
+          id,
+          updatedNote);
       if (updatedNoteEntityOptional.isPresent()) {
         return new ResponseEntity<>(
-          updatedNoteEntityOptional.get(),
-          HttpStatus.OK
-        ); // Return the updated note with status OK.
+            updatedNoteEntityOptional.get(),
+            HttpStatus.OK); // Return the updated note with status OK.
       } else {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND); // Return Not Found if the note doesn't exist.
       }
@@ -104,7 +104,7 @@ public class NoteController {
    * @return A ResponseEntity indicating the result of the delete operation.
    */
   @DeleteMapping("/{id}")
-  public ResponseEntity<?> deleteNote(@PathVariable("id") Long id) {
+  public ResponseEntity<?> deleteNote(@PathVariable("id") @NonNull Long id) {
     try {
       boolean deleted = noteService.deleteNote(id);
       if (deleted) {
@@ -117,5 +117,3 @@ public class NoteController {
     }
   }
 }
-
-

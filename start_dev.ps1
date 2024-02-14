@@ -1,3 +1,6 @@
+##
+# Written for powershell 7.4.1.0
+##
 # Save the original JAVA_HOME and PATH values
 $originalJavaHome = $env:JAVA_HOME
 $originalPath = $env:PATH
@@ -96,7 +99,7 @@ Read-Host "Press any key to exit..."
 # Terminate all Java and Node processes
 Get-Process java | Stop-Process -Force
 Get-Process node | Stop-Process -Force
-Write-Output "▶ Java & Node killed ..."
+Write-Output "▶ Java and Node processes terminated."
 
 # Restore the JAVA_HOME and PATH variables to their original values
 $env:JAVA_HOME = $originalJavaHome
